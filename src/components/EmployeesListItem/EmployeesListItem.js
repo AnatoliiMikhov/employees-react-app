@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import './employees-list-item.css'
+import './EmployeesListItem.css'
 
 const EmployeesListItem = ( { name, salary, ...props } ) => {
 
     const [ increase, setIncrease ] = useState( props.increase )
     const [ liked, setLiked ] = useState( props.liked )
 
-    const onIncrease = () => setIncrease( !increase )
-    const onLikes = () => setLiked( !liked )
+    const onIncrease = () => setIncrease( ( increase ) => !increase )
+    const onLikes = () => setLiked( ( liked ) => !liked )
 
     let classNames = 'list-group-item d-flex justify-content-between'
 

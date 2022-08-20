@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import './employees-list-item.css'
+import './EmployeesListItem.css'
 
 class EmployeesListItem extends Component {
     constructor ( props ) {

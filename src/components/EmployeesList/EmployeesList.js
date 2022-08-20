@@ -1,6 +1,6 @@
-import EmployeesListItem from "../employees-list-item/employees-list-item-class"
+import EmployeesListItem from "../EmployeesListItem/EmployeesListItem"
 
-import './employees-list.css'
+import './EmployeesList.css'
 
 const EmployeesList = ( { data } ) => {
 

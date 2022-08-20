@@ -1,7 +1,7 @@
-import AppInfo from '../app-info/app-info'
-import SearchPanel from '../search-panel/search-panel'
+import AppInfo from '../AppInfo/AppInfo'
+import SearchPanel from '../SearchPanel/SearchPanel'
 import AppFilter from '../AppFilter/AppFilter'
-import EmployeesList from '../employees-list/employees-list'
+import EmployeesList from '../EmployeesList/EmployeesList'
 import EmployeesAddForm from '../EmployeesAddForm/EmployeesAddForm'
 
 import './App.css'
