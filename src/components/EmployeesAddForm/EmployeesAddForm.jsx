@@ -6,13 +6,8 @@ const EmployeesAddForm = () => {
     const [ name, setName ] = useState( '' )
     const [ salary, setSalary ] = useState( 0 )
 
-    function onNameValueChange ( e ) {
-        setName( e.target.value )
-    }
-
-    function onSalaryValueChange ( e ) {
-        setSalary( e.target.value )
-    }
+    const onNameValueChange = ( e ) => setName( e.target.value )
+    const onSalaryValueChange = ( e ) => setSalary( e.target.value )
 
     return (
         <div className="app-add-form">
