@@ -1,18 +1,39 @@
-import './employees-list-item.css';
+import { useState } from 'react'
+import './employees-list-item.css'
 
-const EmployeesListItem = () => {
+const EmployeesListItem = ( { name, salary, ...props } ) => {
+
+    const [ increase, setIncrease ] = useState( props.increase )
+    const [ liked, setLiked ] = useState( props.liked )
+
+    const onIncrease = () => setIncrease( !increase )
+    const onLikes = () => setLiked( !liked )
+
+    let classNames = 'list-group-item d-flex justify-content-between'
+
+    if ( increase ) {
+        classNames += ' increase'
+    }
+
+    if ( liked ) {
+        classNames += ' like'
+    }
+
     return (
-        <li className="list-group-item d-flex justify-content-between">
-            <span className="list-group-item-label">John Smith</span>
-            <input type="text" className="list-group-item-input" defaultValue="1000$"/>
+        <li className={ classNames }>
+            <span className="list-group-item-label" onClick={ onLikes }>{ name }</span>
+            <input type="text" className="list-group-item-input" defaultValue={ salary + '$' } />
             <div className='d-flex justify-content-center align-items-center'>
-                <button type="button"
+
+                <button
+                    onClick={ onIncrease }
+                    type="button"
                     className="btn-cookie btn-sm ">
                     <i className="fas fa-cookie"></i>
                 </button>
 
                 <button type="button"
-                        className="btn-trash btn-sm ">
+                    className="btn-trash btn-sm ">
                     <i className="fas fa-trash"></i>
                 </button>
                 <i className="fas fa-star"></i>
@@ -21,4 +42,4 @@ const EmployeesListItem = () => {
     )
 }
 
-export default EmployeesListItem;
+export default EmployeesListItem
