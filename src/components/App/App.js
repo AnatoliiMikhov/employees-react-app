@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 import AppInfo from '../AppInfo/AppInfo'
 import SearchPanel from '../SearchPanel/SearchPanel'
@@ -13,21 +14,21 @@ function App () {
 
     const [ data, setData ] = useState( [
         {
-            id: 1,
+            id: uuidv4(),
             name: 'John Smith',
             salary: 800,
             increase: false,
             liked: false,
         },
         {
-            id: 2,
+            id: uuidv4(),
             name: 'One Doe',
             salary: 3300,
             increase: false,
             liked: false
         },
         {
-            id: 3,
+            id: uuidv4(),
             name: 'Kite White',
             salary: 5000,
             increase: true,
@@ -41,7 +42,7 @@ function App () {
 
     function addItem ( name, salary ) {
         const newCustomer = {
-            id: Date.now(),
+            id: uuidv4(),
             name,
             salary,
             increase: false,
