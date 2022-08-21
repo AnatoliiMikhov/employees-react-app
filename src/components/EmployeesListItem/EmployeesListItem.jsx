@@ -1,12 +1,14 @@
-import { useState } from 'react'
 import './EmployeesListItem.css'
 
-const EmployeesListItem = ( { name, salary, onDelete, ...props } ) => {
-    const [ increase, setIncrease ] = useState( props.increase )
-    const [ liked, setLiked ] = useState( props.liked )
-
-    const onIncrease = () => setIncrease( ( increase ) => !increase )
-    const onLikes = () => setLiked( ( liked ) => !liked )
+const EmployeesListItem = ( props ) => {
+    const {
+        name,
+        salary,
+        increase,
+        liked,
+        onDelete,
+        onToggleProp
+    } = props
 
     let classNames = 'list-group-item d-flex justify-content-between'
 
@@ -20,19 +22,26 @@ const EmployeesListItem = ( { name, salary, onDelete, ...props } ) => {
 
     return (
         <li className={ classNames }>
-            <span className='list-group-item-label' onClick={ onLikes }>
+            <span
+                className='list-group-item-label'
+                data-toggle='liked'
+                onClick={ onToggleProp }
+            >
                 { name }
             </span>
+
             <input
                 type='text'
                 className='list-group-item-input'
                 defaultValue={ salary + '$' }
             />
+
             <div className='d-flex justify-content-center align-items-center'>
                 <button
-                    onClick={ onIncrease }
                     type='button'
                     className='btn-cookie btn-sm '
+                    data-toggle='increase'
+                    onClick={ onToggleProp }
                 >
                     <i className='fas fa-cookie'></i>
                 </button>
