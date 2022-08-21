@@ -9,14 +9,16 @@ import AppInfo from '../AppInfo/AppInfo'
 import SearchPanel from '../SearchPanel/SearchPanel'
 import AppFilter from '../AppFilter/AppFilter'
 import EmployeesList from '../EmployeesList/EmployeesList'
-import EmployeesAddForm from '../EmployeesAddForm/EmployeesAddFormClass'
+import EmployeesAddForm from '../EmployeesAddForm/EmployeesAddForm'
 
 import './App.css'
 
 function App () {
 
     const [ data, setData ] = useState( employeesArray )
+    const [ term, setTerm ] = useState( '' )
 
+    const visibleData = searchEmployees( data, term )
     const employees = data.length
     const increased = data.filter( elem => elem.increase ).length
 
@@ -33,34 +35,27 @@ function App () {
                 increase: false,
                 liked: false,
             }
-
             setData( ( data ) => [ ...data, newEmployee ] )
         }
     }
 
-    // Way First
-    // function onToggleIncrease ( id ) {
-    //     setData( data => {
-    //         const index = data.findIndex( elem => elem.id === id )
-    //         const old = data[ index ]
-    //         const newItem = { ...old, increase: !old.increase }
-    //         const newData = [ ...data.slice( 0, index ), newItem, ...data.slice( index + 1 ) ]
-    //         return newData
-    //     } )
-    // }
-
-    // Way Second
-    // function onToggleLiked ( id ) {
-    //     setData( data => (
-    //         data.map( elem => ( elem.id === id ) ? { ...elem, liked: !elem.liked } : elem
-    //         ) ) )
-    // }
-
-    // Way Third
     function onToggleProp ( id, prop ) {
         setData( data => (
             data.map( elem => ( elem.id === id ) ? { ...elem, [ prop ]: !elem[ prop ] } : elem )
         ) )
+    }
+
+    function searchEmployees ( items, term ) {
+        if ( term.length === 0 ) {
+            return items
+        }
+        return items.filter( item => {
+            return item.name.indexOf( term ) > -1
+        } )
+    }
+
+    function onUpdateSearch ( term ) {
+        setTerm( term )
     }
 
     return (
@@ -70,12 +65,12 @@ function App () {
                 increased={ increased } />
 
             <div className='search-panel'>
-                <SearchPanel />
+                <SearchPanel onUpdateSearch={ onUpdateSearch } />
                 <AppFilter />
             </div>
 
             <EmployeesList
-                data={ data }
+                data={ visibleData }
                 onDelete={ deleteItem }
                 onToggleProp={ onToggleProp }
             />
