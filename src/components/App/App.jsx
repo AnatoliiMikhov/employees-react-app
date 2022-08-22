@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 /* ------------------------- uuid Generator for key ------------------------- */
 /* -- https://www.npmjs.com/package/uuid#uuidv5name-namespace-buffer-offset - */
@@ -23,9 +23,17 @@ function App () {
     const [ term, setTerm ] = useState( '' )
     const [ filter, setFilter ] = useState( 'all' )
 
-    const visibleData = filterEmployees( searchEmployees( data, term ), filter )
-    const employees = data.length
-    const increased = data.filter( ( elem ) => elem.increase ).length
+    const visibleData = useMemo( () => {
+        return filterEmployees( searchEmployees( data, term ), filter )
+    }, [ data, filter, term ] )
+
+    const employees = useMemo( () => {
+        return data.length
+    }, [ data ] )
+
+    const increased = useMemo( () => {
+        return data.filter( ( elem ) => elem.increase ).length
+    }, [ data ] )
 
     return (
         <div className='app'>
@@ -43,6 +51,7 @@ function App () {
                 onChangeSalary={ onChangeSalary }
             />
             <EmployeesAddForm onAddItem={ addItem } />
+
         </div>
     )
 
@@ -79,7 +88,6 @@ function App () {
                 elem.id === id ? { ...elem, 'salary': newSalaryValue } : elem
             ) )
         ) )
-        console.log( data )
     }
 
     function searchEmployees ( items, term ) {
@@ -101,6 +109,7 @@ function App () {
                 return items
         }
     }
+
 
     function onChangeFilter ( filter ) {
         setFilter( filter )
