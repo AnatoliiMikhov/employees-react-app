@@ -7,7 +7,8 @@ const EmployeesListItem = ( props ) => {
         increase,
         liked,
         onDelete,
-        onToggleProp
+        onToggleProp,
+        onChangeSalary
     } = props
 
     let classNames = 'list-group-item d-flex justify-content-between'
@@ -33,7 +34,8 @@ const EmployeesListItem = ( props ) => {
             <input
                 type='text'
                 className='list-group-item-input'
-                defaultValue={ salary + '$' }
+                defaultValue={ `$${salary}` }
+                onChange={ onChangeSalary }
             />
 
             <div className='d-flex justify-content-center align-items-center'>

@@ -39,6 +39,7 @@ function App () {
                 data={ visibleData }
                 onDelete={ deleteItem }
                 onToggleProp={ onToggleProp }
+                onChangeSalary={ onChangeSalary }
             />
             <EmployeesAddForm onAddItem={ addItem } />
         </div>
@@ -67,6 +68,17 @@ function App () {
                 elem.id === id ? { ...elem, [ prop ]: !elem[ prop ] } : elem
             )
         )
+    }
+
+    function onChangeSalary ( id, salaryValue ) {
+        const newSalaryValue = salaryValue.slice( 1 )
+
+        setData( ( data ) => (
+            data.map( ( elem ) => (
+                elem.id === id ? { ...elem, 'salary': newSalaryValue } : elem
+            ) )
+        ) )
+        console.log( data )
     }
 
     function searchEmployees ( items, term ) {
