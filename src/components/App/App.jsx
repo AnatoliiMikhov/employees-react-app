@@ -21,8 +21,9 @@ import './App.css'
 function App () {
     const [ data, setData ] = useState( employeesArray )
     const [ term, setTerm ] = useState( '' )
+    const [ filter, setFilter ] = useState( 'all' )
 
-    const visibleData = searchEmployees( data, term )
+    const visibleData = filterEmployees( searchEmployees( data, term ), filter )
     const employees = data.length
     const increased = data.filter( ( elem ) => elem.increase ).length
 
@@ -32,7 +33,7 @@ function App () {
 
             <div className='search-panel'>
                 <SearchPanel onUpdateSearch={ onUpdateSearch } />
-                <AppFilter />
+                <AppFilter onChangeFilter={ onChangeFilter } filter={ filter } />
             </div>
 
             <EmployeesList
@@ -88,6 +89,21 @@ function App () {
         return items.filter( ( item ) => {
             return item.name.toLowerCase().indexOf( term.toLowerCase() ) > -1
         } )
+    }
+
+    function filterEmployees ( items, filter ) {
+        switch ( filter ) {
+            case 'liked':
+                return items.filter( item => item.liked )
+            case 'moreThan1000':
+                return items.filter( item => item.salary > 1000 )
+            default:
+                return items
+        }
+    }
+
+    function onChangeFilter ( filter ) {
+        setFilter( filter )
     }
 
     function onUpdateSearch ( term ) {
