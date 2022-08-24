@@ -42,6 +42,7 @@ const EmployeesListItem = ( props ) => {
                 <button
                     type='button'
                     className='btn-cookie btn-sm '
+                    title={ increase ? 'no bonus' : 'give a prize' }
                     data-toggle='increase'
                     onClick={ onToggleProp }
                 >
@@ -50,6 +51,7 @@ const EmployeesListItem = ( props ) => {
 
                 <button
                     type='button'
+                    title='Do you want to delete?'
                     className='btn-trash btn-sm '
                     onClick={ onDelete }
                 >
