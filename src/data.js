@@ -5,7 +5,7 @@ export const employeesArray = [
     {
         id: uuidv4(),
         name: 'Anatolii Mihov',
-        salary: 5959,
+        salary: 1200,
         increase: true,
         liked: true,
     },
@@ -20,7 +20,7 @@ export const employeesArray = [
         id: uuidv4(),
         name: 'Kite White',
         salary: 5000,
-        increase: true,
-        liked: true,
+        increase: false,
+        liked: false,
     },
 ]
