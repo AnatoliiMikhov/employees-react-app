@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import './SearchPanel.css'
+import './SearchPanel.scss'
 
 const SearchPanel = ( props ) => {
     const { onUpdateSearch } = props

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './EmployeesAddForm.css'
+import './EmployeesAddForm.scss'
 
 const EmployeesAddForm = ( { onAddItem } ) => {
     const [ name, setName ] = useState( '' )

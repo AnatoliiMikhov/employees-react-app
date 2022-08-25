@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 export const employeesArray = [
     {
         id: uuidv4(),
-        name: 'Anatolii Mihov',
+        name: 'Anatolii Mikhov',
         salary: 1200,
         increase: true,
         liked: true,

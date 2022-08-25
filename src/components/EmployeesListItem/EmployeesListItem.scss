@@ -1,6 +1,8 @@
+@import "../../variables.scss";
+
 .list-group-item {
     padding: 15px 20px;
-    border-bottom: 1px solid #3d5a80;
+    border-bottom: 1px solid $main-color;
 }
 
 .list-group-item:last-child {
@@ -31,11 +33,12 @@
 }
 
 .list-group-item .btn-cookie {
-    color: #e09f3e;
+    color: $increase-color;
 }
 
 .list-group-item .btn-trash {
-    color: #e5383b;
+    color: $btn-trash-color;
+    // color: var(--btn-trash-color);
 }
 
 .list-group-item .fa-star {
@@ -44,7 +47,7 @@
     text-align: center;
     line-height: 35px;
     font-size: 16px;
-    color: #FFD700;
+    color: $increase-color;
     transition: 0.3s all;
     transform: translateX(30px);
     opacity: 0;
@@ -52,14 +55,14 @@
 
 .list-group-item.like .fa-star {
     opacity: 1;
-    transform: translateX(0px);
+    transform: translateX(0);
 }
 
-.list-group-item.increase .list-group-item-label, .list-group-item.increase .list-group-item-input {
-    color: #e09f3e;
+.list-group-item.increase .list-group-item-label,
+.list-group-item.increase .list-group-item-input {
+    color: $increase-color;
 }
-  
+
 .list-group-item.increase .btn-star {
-    color: #aeaeae;
+    color: $increase-color;
 }
-  

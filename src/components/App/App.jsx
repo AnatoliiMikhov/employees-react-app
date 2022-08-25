@@ -15,7 +15,7 @@ import EmployeesList from '../EmployeesList/EmployeesList'
 import EmployeesAddForm from '../EmployeesAddForm/EmployeesAddForm'
 
 /* --------------------------------- Styles --------------------------------- */
-import './App.css'
+import './App.scss'
 
 /* ------------------------------ App Component ----------------------------- */
 function App () {
