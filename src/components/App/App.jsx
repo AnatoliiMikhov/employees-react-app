@@ -19,105 +19,105 @@ import './App.scss'
 
 /* ------------------------------ App Component ----------------------------- */
 function App () {
-    const [ data, setData ] = useState( employeesArray )
-    const [ term, setTerm ] = useState( '' )
-    const [ filter, setFilter ] = useState( 'all' )
+  const [ data, setData ] = useState( employeesArray )
+  const [ term, setTerm ] = useState( '' )
+  const [ filter, setFilter ] = useState( 'all' )
 
-    const visibleData = useMemo( () => {
-        return filterEmployees( searchEmployees( data, term ), filter )
-    }, [ data, filter, term ] )
+  const visibleData = useMemo( () => {
+    return filterEmployees( searchEmployees( data, term ), filter )
+  }, [ data, filter, term ] )
 
-    const employees = useMemo( () => {
-        return data.length
-    }, [ data ] )
+  const employees = useMemo( () => {
+    return data.length
+  }, [ data ] )
 
-    const increased = useMemo( () => {
-        return data.filter( ( elem ) => elem.increase ).length
-    }, [ data ] )
+  const increased = useMemo( () => {
+    return data.filter( ( elem ) => elem.increase ).length
+  }, [ data ] )
 
-    return (
-        <div className='app'>
-            <AppInfo employees={ employees } increased={ increased } />
+  return (
+    <div className='app'>
+      <AppInfo employees={ employees } increased={ increased } />
 
-            <div className='search-panel'>
-                <SearchPanel onUpdateSearch={ onUpdateSearch } />
-                <AppFilter onChangeFilter={ onChangeFilter } filter={ filter } />
-            </div>
+      <div className='search-panel'>
+        <SearchPanel onUpdateSearch={ onUpdateSearch } />
+        <AppFilter onChangeFilter={ onChangeFilter } filter={ filter } />
+      </div>
 
-            <EmployeesList
-                data={ visibleData }
-                onDelete={ deleteItem }
-                onToggleProp={ onToggleProp }
-                onChangeSalary={ onChangeSalary }
-            />
-            <EmployeesAddForm onAddItem={ addItem } />
+      <EmployeesList
+        data={ visibleData }
+        onDelete={ deleteItem }
+        onToggleProp={ onToggleProp }
+        onChangeSalary={ onChangeSalary }
+      />
+      <EmployeesAddForm onAddItem={ addItem } />
 
-        </div>
+    </div>
+  )
+
+  function deleteItem ( id ) {
+    setData( ( data ) => data.filter( ( item ) => item.id !== id ) )
+  }
+
+  function addItem ( name, salary ) {
+    if ( name && salary > 0 && name.length > 1 ) {
+      const newEmployee = {
+        id: uuidv4(),
+        name,
+        salary,
+        increase: false,
+        liked: false,
+      }
+      setData( ( data ) => [ ...data, newEmployee ] )
+    }
+  }
+
+  function onToggleProp ( id, prop ) {
+    setData( ( data ) =>
+      data.map( ( elem ) =>
+        elem.id === id ? { ...elem, [ prop ]: !elem[ prop ] } : elem
+      )
     )
+  }
 
-    function deleteItem ( id ) {
-        setData( ( data ) => data.filter( ( item ) => item.id !== id ) )
+  function onChangeSalary ( id, salaryValue ) {
+    const newSalaryValue = salaryValue.slice( 1 )
+
+    setData( ( data ) => (
+      data.map( ( elem ) => (
+        elem.id === id ? { ...elem, 'salary': newSalaryValue } : elem
+      ) )
+    ) )
+  }
+
+  function searchEmployees ( items, term ) {
+    if ( term.length === 0 ) {
+      return items
     }
+    return items.filter( ( item ) => {
+      return item.name.toLowerCase().indexOf( term.toLowerCase() ) > -1
+    } )
+  }
 
-    function addItem ( name, salary ) {
-        if ( name && salary > 0 && name.length > 1 ) {
-            const newEmployee = {
-                id: uuidv4(),
-                name,
-                salary,
-                increase: false,
-                liked: false,
-            }
-            setData( ( data ) => [ ...data, newEmployee ] )
-        }
+  function filterEmployees ( items, filter ) {
+    switch ( filter ) {
+      case 'liked':
+        return items.filter( item => item.liked )
+      case 'moreThan1000':
+        return items.filter( item => item.salary > 1000 )
+      default:
+        return items
     }
-
-    function onToggleProp ( id, prop ) {
-        setData( ( data ) =>
-            data.map( ( elem ) =>
-                elem.id === id ? { ...elem, [ prop ]: !elem[ prop ] } : elem
-            )
-        )
-    }
-
-    function onChangeSalary ( id, salaryValue ) {
-        const newSalaryValue = salaryValue.slice( 1 )
-
-        setData( ( data ) => (
-            data.map( ( elem ) => (
-                elem.id === id ? { ...elem, 'salary': newSalaryValue } : elem
-            ) )
-        ) )
-    }
-
-    function searchEmployees ( items, term ) {
-        if ( term.length === 0 ) {
-            return items
-        }
-        return items.filter( ( item ) => {
-            return item.name.toLowerCase().indexOf( term.toLowerCase() ) > -1
-        } )
-    }
-
-    function filterEmployees ( items, filter ) {
-        switch ( filter ) {
-            case 'liked':
-                return items.filter( item => item.liked )
-            case 'moreThan1000':
-                return items.filter( item => item.salary > 1000 )
-            default:
-                return items
-        }
-    }
+  }
 
 
-    function onChangeFilter ( filter ) {
-        setFilter( filter )
-    }
+  function onChangeFilter ( filter ) {
+    setFilter( filter )
+  }
 
-    function onUpdateSearch ( term ) {
-        setTerm( term )
-    }
+  function onUpdateSearch ( term ) {
+    setTerm( term )
+  }
 }
 
 export default App
