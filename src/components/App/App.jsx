@@ -27,13 +27,8 @@ function App () {
     return filterEmployees( searchEmployees( data, term ), filter )
   }, [ data, filter, term ] )
 
-  const employees = useMemo( () => {
-    return data.length
-  }, [ data ] )
-
-  const increased = useMemo( () => {
-    return data.filter( ( elem ) => elem.increase ).length
-  }, [ data ] )
+  const employees = data.length
+  const increased = data.filter( ( elem ) => elem.increase ).length
 
   return (
     <div className='app'>
